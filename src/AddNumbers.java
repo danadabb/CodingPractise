@@ -1,56 +1,44 @@
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
-/**
- * CTCI question - add two numbers without using addition operator
- * @author Dana Dabbagh
- */
-public class AddNumbers
+public class addNumbers
 {
 
 	public static void main(String[] args)
 	{
-		Scanner in = new Scanner(System.in);
+	    Scanner in = new Scanner(System.in);
 
-		int a = in.nextInt();
-		int b = in.nextInt();
+        int a = in.nextInt();
+        int b = in.nextInt();
 
-		System.out.println(addNumbers(a, b));
+        System.out.println(addNumbers(a,b));
 	}
 
 
-	private static int addNumbers(int a, int b)
+	static int addNumbers(int a, int b)
 	{
 
 		int previous = 0;
 		int total = 0;
+		int bitA = a;
+		int bitB = b; 
 		int position = 0;
-		while (a != 0 || b != 0)
+		while(bitA !=0 || bitB!= 0)
 		{
-			//Get the first bit
-			int bitA = a & 1;
-			int bitB = b & 1;
+			bitA = (a >> position) & 1; //get the bit at position
+			bitB = (b >> position) & 1; 
 
-			//If a and b are 1 then we'll have '0010' or 2
-			if (bitA == 1 && bitB == 1)
+			if( a == 1 & b == 1 ) 
 			{
-				total = 2;
-			} else
-			{
-				//otherwise just 1 or 0
-				total = bitA | bitB;
+				total = 10;
+			}else{
+				total = a | b; 
 			}
 
-			//shift left and xor to the previous total
-			previous |= (total << position);
-
-			//increment the current position
-			position++;
-
-			//move the next bit to first position
-			a = a >> 1;
-			b = b >> 1;
+			previous |= (total << position); 
+            position++; 
 		}
 
-		return previous;
+		return previous; 
 	}
 }
