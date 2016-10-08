@@ -56,7 +56,7 @@ public class BST
 		}
 	}
 
-	void display(Node node)
+	private void display(Node node)
 	{
 		if (node != null)
 		{
